@@ -1,8 +1,12 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
+        boolean running = true;
+        Library library = new Library();
+    while (running) {
         System.out.println("Welcome to The Library App!");
         System.out.println("1 - Add Book");
         System.out.println("2 - Remove Book");
@@ -11,12 +15,16 @@ public class Main {
         System.out.println("5 - Exit");
         System.out.println("Please select an option number (1-5):");
 
-        boolean running = true;
-        Library library = new Library();
         Scanner sc = new Scanner(System.in);
-        int option = sc.nextInt();
+        int option = -1;
+        try {
+            option = sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            sc.nextLine();
+            continue;
+        }
 
-        while (running) {
             switch (option) {
                 case 1:
                     Book book = new Book();
@@ -27,29 +35,40 @@ public class Main {
                     System.out.println("Enter Book Author:");
                     book.setAuthor(sc.nextLine());
                     System.out.println("Enter Book ISBN:");
-                    book.setISBN(sc.nextLine());
+                    book.setISBN(sc.nextLong());
                     System.out.println("Enter Publishing Year:");
                     book.setYear(sc.nextInt());
                     library.addBook(book);
                     System.out.println("Book Successfully Added!");
-                    System.exit(0);
+                    break;
                 case 2:
                     System.out.println("Remove Book - Enter ISBN:");
-                    String removeBook;
+                    long removeBook = sc.nextLong();
+                    break;
                 case 3:
                     System.out.println("View Library:");
                     System.out.println(library.displayLibrary());
+                    break;
                 case 4:
                     System.out.println("Search Library:");
+                    System.out.println("Enter Book ISBN:");
+                    long search = sc.nextLong();
+                    break;
                 case 5:
-                    System.out.println("Exit?");
-                    System.out.println("1 - yes");
-                    System.out.println("2 - no");
+                    System.out.println("Exit? (Y/N)");
+                    char exInput= sc.next().charAt(0);
+                    if (exInput == 'y' || exInput == 'Y') {
+                        System.out.println("Exiting...");
+                        running = false;
+                    } else {
+                        System.out.println("Returning to Main Menu...");
+                        break;
+                    }
+                    break;
 
 
                 default:
-                    System.out.println("Invalid Selection, Please Try Again.");
-
+                    System.out.println("Invalid Selection. Please Try Again.");
 
             }
         }

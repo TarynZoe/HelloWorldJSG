@@ -1,9 +1,20 @@
 public class Book {
     private  String title = "";
     private  String author = "";
-    private  String ISBN = "";
+    private  long ISBN = 0;
     private int year = 0;
 
+    public Book() {
+        //empty
+    };
+
+    public Book(String inTitle, String inAuthor, long inISBN, int inYear)
+    {
+        this.title = inTitle;
+        this.author = inAuthor;
+        this.ISBN = inISBN;
+        this.year = inYear;
+    }
     public String getTitle() {
         return title;
     }
@@ -20,11 +31,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getISBN() {
+    public long getISBN() {
         return ISBN;
     }
 
-    public void setISBN(String ISBN) {
+    public void setISBN(long ISBN) {
         this.ISBN = ISBN;
     }
 
@@ -37,5 +48,3 @@ public class Book {
     }
 
 }
-
-

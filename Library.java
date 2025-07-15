@@ -5,6 +5,7 @@ public class Library {
 
     public Library() {
         books = new ArrayList<>();
+        books.add(new Book("1984", "George Orwell", 9780, 1949));
     }
 
     public void addBook(Book book) {
@@ -14,9 +15,9 @@ public class Library {
     public void removeBook(Book book) {
         books.remove(book);
     }
+
     public ArrayList<Book> displayLibrary() {
         return books;
     }
-    Library.addBook(new Book("1984", "George Orwell", "9780000000001", 1949));
 
 }
