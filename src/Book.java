@@ -1,4 +1,5 @@
 package com.java.example;
+
 public class Book {
     private  String title = "";
     private  String author = "";
@@ -11,10 +12,10 @@ public class Book {
 
     public Book(String inTitle, String inAuthor, long inISBN, int inYear)
     {
-        this.title = inTitle;
-        this.author = inAuthor;
-        this.ISBN = inISBN;
-        this.year = inYear;
+        title = inTitle;
+        author = inAuthor;
+        ISBN = inISBN;
+        year = inYear;
     }
     public String getTitle() {
         return title;
@@ -50,7 +51,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Title: " + this.title + " Author: " + this.author + " ISBN: " + this.getISBN() + " Year Published: " + this.getYear();
+        return "Title: " + title + " | Author: " + author + " | ISBN: " + ISBN + " | Year Published: " + year;
     }
 
 }

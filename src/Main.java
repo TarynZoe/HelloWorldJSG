@@ -2,6 +2,7 @@ package com.java.example;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
 
@@ -43,6 +44,7 @@ public class Main {
                     library.addBook(book);
                     System.out.println("Book Successfully Added!");
                     break;
+
                 case 2:
                     System.out.println("Remove Book - Enter ISBN:");
                     long removeIsbn;
@@ -53,38 +55,44 @@ public class Main {
                         break;
                     }
 
-                    System.out.println(book.getISBN() + book.getTitle());
                     System.out.println("Confirm Remove? (Y/N)");
 
-
-
                     //loop to confirm removal of book
-                    char exInput1= sc.next().charAt(0);
+                    char exInput1 = sc.next().charAt(0);
                     if (exInput1 == 'y' || exInput1 == 'Y') {
                         System.out.println("Removing...");
-                        System.out.println(book.getTitle() + "has been successfully removed!");
-                        library.removeBook(book);
+                        System.out.println(library.getBookTitlebyIsbn(removeIsbn) + " has been successfully removed!");
+                        library.removeBook(removeIsbn);
                     } else {
-                        System.out.println("Returning to Main Menu...");
+                        System.out.println("Invalid Input. Returning to Main Menu...");
                         break;
                     }
                     break;
+
                 case 3:
                     System.out.println("View Library:");
-                    System.out.println(library.displayLibrary());
+                    library.printBooks();
                     break;
+
                 case 4:
-                    System.out.println("Search Library:");
+                    System.out.println("Search Library");
                     System.out.println("Enter Book ISBN:");
-                    boolean bLoc = false;
                     long libSearch = sc.nextLong();
-                    for(Book b : library.displayLibrary()) {
+
+                    boolean bLoc = false;
+
+                    for(Book b : library.getBooks()) {
                         if (b.getISBN() == libSearch) {
                             System.out.println(b.getTitle() + " Located!");
+                            bLoc = true;
                             break;
                         }
                     }
-                    break;
+                        if(!bLoc){
+                            System.out.println("Book not found :( ");
+                            break;
+                    }
+
                 case 5:
                     System.out.println("Exit? (Y/N)");
                     char exInput2= sc.next().charAt(0);
