@@ -52,23 +52,30 @@ public class Main {
                         removeIsbn = sc.nextLong();
                     } catch (InputMismatchException e2) {
                         System.out.println("Invalid ISBN. Please enter a valid ISBN.");
+                        sc.next();
                         break;
                     }
 
-                    System.out.println("Confirm Remove? (Y/N)");
+                    if (library.doesBookExist(removeIsbn)) {
+                        System.out.println("Confirm Removal of " + library.getBookTitlebyIsbn(removeIsbn) + "? (Y/N)");
 
-                    //loop to confirm removal of book
-                    char exInput1 = sc.next().charAt(0);
-                    if (exInput1 == 'y' || exInput1 == 'Y') {
-                        System.out.println("Removing...");
-                        System.out.println(library.getBookTitlebyIsbn(removeIsbn) + " has been successfully removed!");
-                        library.removeBook(removeIsbn);
+                        //loop to confirm removal of book
+                        char exInput1 = sc.next().charAt(0);
+                        if (exInput1 == 'y' || exInput1 == 'Y') {
+                            System.out.println("Removing...");
+                            System.out.println(library.getBookTitlebyIsbn(removeIsbn) + " has been successfully removed!");
+                            library.removeBook(removeIsbn);
+                        } else if (exInput1 == 'n' || exInput1 == 'N') {
+                            System.out.println("Returning to Main Menu...");
+
                     } else {
-                        System.out.println("Invalid Input. Returning to Main Menu...");
-                        break;
+                            System.out.println("Invalid Input. Returning to Main Menu...");
+                            break;
+                        }
+                    } else {
+                        System.out.println("Unable to locate book associated with ISBN:" + removeIsbn +". Please check the ISBN and try again.");
                     }
                     break;
-
                 case 3:
                     System.out.println("View Library:");
                     library.printBooks();
@@ -77,8 +84,16 @@ public class Main {
                 case 4:
                     System.out.println("Search Library");
                     System.out.println("Enter Book ISBN:");
-                    long libSearch = sc.nextLong();
+                    long libSearch;
 
+                    try {
+                        libSearch = sc.nextLong();
+                    } catch (InputMismatchException e3) {
+                        System.out.println("Invalid ISBN. Please enter a valid ISBN.");
+                        sc.next();
+                        break;
+                    }
+                    libSearch = sc.nextLong();
                     boolean bLoc = false;
 
                     for(Book b : library.getBooks()) {
@@ -89,7 +104,7 @@ public class Main {
                         }
                     }
                         if(!bLoc){
-                            System.out.println("Book not found :( ");
+                            System.out.println("Unable to locate book associated with ISBN:" +libSearch);
                             break;
                     }
 

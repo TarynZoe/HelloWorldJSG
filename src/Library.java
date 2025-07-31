@@ -19,6 +19,19 @@ public class Library {
         return books.removeIf(book -> book.getISBN() == ISBN);
     }
 
+    public boolean doesBookExist(long ISBN) {
+        for (Book book : books) {
+            if(book.getISBN() == ISBN){
+                return true;
+            }
+        }
+        return false;
+    }
+    /*public boolean checkISBNlength(long ISBN) {
+        for (Book book : books) {
+            if()
+        }
+        }*/
     public String getBookTitlebyIsbn(long ISBN) {
         for (Book book : books) {
             if (book.getISBN() == ISBN) {
